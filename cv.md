@@ -2,22 +2,10 @@
 
 Email:  phamhongviet52@gmail.com    
 
-## Summary
+## Introduction
 
-I am a dedicated, hard-working, and professional DevOps Engineer based in Ho Chi Minh City.
-I specialize in large-scale web applications and have been helping businesses provide high-quality services to their customers.
-My expertise lies in keeping sites up and running with high security, cost-effectiveness, and efficiency.
-I am passionate about working for companies that bring high value to the world.
+I am a dedicated and professional DevOps Engineer based in Ho Chi Minh City, specializing in large-scale web applications. With extensive experience in modernizing systems, enhancing infrastructure security, and optimizing application performance, I have a proven track record of helping businesses deliver high-quality services to their customers. My expertise spans across various tools and technologies, including Ansible, Terraform, Kubernetes, and cloud platforms like AWS and Azure. I ensure that sites remain highly secure, cost-effective, and efficient. I am passionate about automating tasks, improving system reliability, and driving efficiency in IT operations. I am committed to contributing to companies that bring significant value to the world.
 
-## Career History
-
-- DevOps Engineer at GuardRails (current position since 02/2022)    
-*I am the first DevOps Engineer of GuardRails.*
-- DevOps Team Leader at Timo by Lifestyle Project Management Ltd. (since 05/2017 to 02/2022)    
-*I started as a one-man-team DevOps Engineer to help modernizing Timo systems, services, processes; help other teams in IT department work smoothly with each other; and later build up my DevOps/SysOps team.*
-- Linux System Administrator at Zinio/Audience Media Ltd. (from 04/2014 to 03/2017)    
-*I started as the only System Admin in Audience Media (acquired by Zinio), then build up my System team as the company grow.*
-- 6 months as IT technician at Prism IT Service Ltd. (2013)
 
 ## Highlighted Skills
 
@@ -31,9 +19,12 @@ I am passionate about working for companies that bring high value to the world.
 - Deploy services on Kubernetes with Helm charts.
 - Manage servers resource capacity, recommend purchase plan based on actual usage and help building cloud cost model and budgeting.
 
-## Projects Accomplished
 
-### GuardRails, DevSecOps platform
+## Career History
+
+### GuardRails, DevSecOps platform (02/2022 - Present)
+
+Start as the first DevOps Engineer at GuardRails.
 
 - Improve many aspects of GuardRails infrastructure security following SOC 2 standards.
 - Improve application development with CircleCI.
@@ -42,7 +33,10 @@ I am passionate about working for companies that bring high value to the world.
 - Load test the on-premise application and create a resource capacity estimation calculator as a reference for customers
 - Control cloud computing cost
 
-### Timo, digital banking
+### Timo digital banking (05/2017 - 02/2022)
+
+DevOps Team Leader at Timo.    
+I started as a one-man-team DevOps Engineer to help modernizing Timo systems, services, processes; help other teams in IT department work smoothly with each other; and later build up my DevOps/SysOps team.
 
 - Significantly improving Timo’s performance, availability, reliability, scalability and security
 	- Building monitoring system using Grafana, ElasticSearch, Logstash, Kibana and InfluxDB
@@ -59,7 +53,10 @@ I am passionate about working for companies that bring high value to the world.
 	- Continuously improving Timo systems on AWS following Well Architected Framework
 - Help IT team and Product team work efficiently with each other and create products or features with suitable technologies, great user experience and low operational cost.
 
-### Zinio, magazine publishing platform
+### Zinio, magazine publishing platform (04/2014 - 03/2017)
+
+Linux System Administrator at Zinio/Audience Media Ltd.    
+I started as the only System Admin in Audience Media (acquired by Zinio), then build up my System team as the company grow.
 
 - Deploying highly available News website for Zinio’s client
 	- 55 millions page views per month
@@ -102,31 +99,35 @@ I am passionate about working for companies that bring high value to the world.
 
 - Bachelor of Sciences of IT at Ho Chi Minh University of Sciences
 - Outstanding Diploma of Network Engineering at NIIT, Hoa Sen University
-- Books fully read:
-	- Kubernetes In Action
-	- Infrastructure as Code
-	- Time Management for System Administrators
-	- Good to Great
-	- The Phoenix Project
-	- Web Operations
-	- Site Reliability Engineer
-	- Effective Monitoring and Alerting
-	- Clean Code
-	- The Clean Coder
-	- The Art of UNIX Programming
-	- The Art of Capacity Planning: Scaling Web Resources
-	- 12factor.net
-- Books partially read:
-	- The Adventures of an IT Leader
-	- The Pragmatic Programmer
-	- SOA Patterns
-	- Scalability Rules
-	- Distributed Systems: Principles and Paradigms
-	- Advanced API Security
-	- Working with Legacy Systems
-	- Working Effectively with Legacy Code
-	- The Design of Everyday Things
-	- Patterns of Enterprise Application Architecture
+
+### Books read:
+
+- Kubernetes In Action
+- Infrastructure as Code
+- Time Management for System Administrators
+- Good to Great
+- The Phoenix Project
+- Web Operations
+- Site Reliability Engineer
+- Effective Monitoring and Alerting
+- Clean Code
+- The Clean Coder
+- The Art of UNIX Programming
+- The Art of Capacity Planning: Scaling Web Resources
+- 12factor.net
+
+### Books partially read:
+
+- The Adventures of an IT Leader
+- The Pragmatic Programmer
+- SOA Patterns
+- Scalability Rules
+- Distributed Systems: Principles and Paradigms
+- Advanced API Security
+- Working with Legacy Systems
+- Working Effectively with Legacy Code
+- The Design of Everyday Things
+- Patterns of Enterprise Application Architecture
 
 
 ## Reference
