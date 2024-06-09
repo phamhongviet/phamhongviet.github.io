@@ -13,6 +13,11 @@ cat > "$html_f" <<EOF
 <head>
 <title>${title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  font-family: Georgia, "Times New Roman", serif;
+}
+</style>
 </head>
 <body>
 EOF
