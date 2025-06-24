@@ -4,11 +4,12 @@ Email:  phamhongviet52@gmail.com
 
 ## Introduction
 
-I am a dedicated and professional DevOps Engineer based in Ho Chi Minh City, specializing in large-scale web applications. With extensive experience in modernizing systems, enhancing infrastructure security, and optimizing application performance, I have a proven track record of helping businesses deliver high-quality services to their customers. My expertise spans across various tools and technologies, including Ansible, Terraform, Kubernetes, and cloud platforms like AWS and Azure. I ensure that sites remain highly secure, cost-effective, and efficient. I am passionate about automating tasks, improving system reliability, and driving efficiency in IT operations. I am committed to contributing to companies that bring significant value to the world.
+I am a seasoned DevOps Engineer and Infrastructure Architect based in Ho Chi Minh City, with over 9 years of experience in building and scaling enterprise-grade web applications. At GuardRails and Timo Digital Banking, I've led critical infrastructure modernization initiatives that significantly enhanced system reliability, security, and performance. My expertise encompasses the complete DevOps lifecycle, from infrastructure automation with Ansible and Terraform to container orchestration with Kubernetes and cloud architecture on AWS and Azure. I excel in optimizing cloud costs, implementing robust monitoring solutions, and establishing secure CI/CD pipelines. As a team leader, I've successfully built and mentored DevOps teams while driving the adoption of Infrastructure as Code practices and security first methodologies. I am particularly passionate about solving complex scalability challenges and implementing DevSecOps practices that enable organizations to deliver value rapidly and securely.
 
 
 ## Highlighted Skills
 
+- Leverage agentic AI coding assistants to enhance development productivity (Cursor, VSCodium + RooCode).
 - Analyze system and application performance and behavior to help making decisions.
 - Automate infrastructure tasks at large scale using wide variety of tools and programming languages including Ansible, Terraform, Bash, Python, Jenkins, Kubernetes, etc.
 - Manage Linux servers. Deep understanding of GNU/Linux. Have been using ArchLinux at home and work as my daily driver since 2010.
@@ -38,7 +39,7 @@ Start as the first DevOps Engineer at GuardRails.
 DevOps Team Leader at Timo.    
 I started as a one-man-team DevOps Engineer to help modernizing Timo systems, services, processes; help other teams in IT department work smoothly with each other; and later build up my DevOps/SysOps team.
 
-- Significantly improving Timo’s performance, availability, reliability, scalability and security
+- Significantly improving Timo's performance, availability, reliability, scalability and security
 	- Building monitoring system using Grafana, ElasticSearch, Logstash, Kibana and InfluxDB
 	- Analyzing application performance with collected metrics data, including data from Nginx, HAProxy, MariaDB, RabbitMQ, Redis and OS
 	- Optimizing application and its infrastructure, works directly or indirectly with development teams
@@ -58,11 +59,11 @@ I started as a one-man-team DevOps Engineer to help modernizing Timo systems, se
 Linux System Administrator at Zinio/Audience Media Ltd.    
 I started as the only System Admin in Audience Media (acquired by Zinio), then build up my System team as the company grow.
 
-- Deploying highly available News website for Zinio’s client
+- Deploying highly available News website for Zinio's client
 	- 55 millions page views per month
 	- Using AWS EC2, CloudFront, ELB, Httpd, Varnish, Redis, Percona and Ansible
 	- Optimizing cache usage to ensure the balance of performance and correctness
-- Deploying massive web services for Zinio’s magazine publishing platform
+- Deploying massive web services for Zinio's magazine publishing platform
 	- Highly available, autoscale-able, self-healing, manageless
 	- Almost fully automated and monitored system
 	- Micro services infrastructure applications
@@ -70,12 +71,12 @@ I started as the only System Admin in Audience Media (acquired by Zinio), then b
 - Developing and deploying high performance image manipulation service
  	- Written in Golang 1.4 with TDD, automated test, packaging and deployment
 	- Cache using Varnish and Redis
-	- Used in Zinio’s magazine publishing platform
-- Developing tool for creating web development environment for Zinio’s development teams
+	- Used in Zinio's magazine publishing platform
+- Developing tool for creating web development environment for Zinio's development teams
 	- Using Bash script and Docker (before docker-compose and docker-machine exist)
 	- Almost identical to production environment
 	- Automatic creating, configuring and recreating
-- Deploying multiple Wordpress sites with required theme and plugins for Zinio’s clients
+- Deploying multiple Wordpress sites with required theme and plugins for Zinio's clients
 	- Automated using Python script, git and Ansible
 	- Updating plugins and themes for multiple Wordpress sites in multiple web servers
 
@@ -88,11 +89,11 @@ I started as the only System Admin in Audience Media (acquired by Zinio), then b
     - [certtool-pki](https://github.com/phamhongviet/certtool-pki)
 - Dynamic Ansible inventory with MySQL backend (Python)
     - [ansible-inventory-mysql](https://github.com/phamhongviet/ansible-inventory-mysql)
-- DNS service and template engine with Hashicorp’s Serf, decentralized cluster management (Golang)
+- DNS service and template engine with Hashicorp's Serf, decentralized cluster management (Golang)
     - [serf-dns](https://github.com/phamhongviet/serf-dns)
     - [serf-template](https://github.com/phamhongviet/serf-template)
-- Extract links and their positions from PDF files using xpdf (C++), used in Zinio’s magazines
-- A small daemon to watch a folder for file write events and push job to message queue (C, inotify, hiredis), used in Zinio’s PDF ingestion
+- Extract links and their positions from PDF files using xpdf (C++), used in Zinio's magazines
+- A small daemon to watch a folder for file write events and push job to message queue (C, inotify, hiredis), used in Zinio's PDF ingestion
 
 
 ## Education
