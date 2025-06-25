@@ -33,6 +33,8 @@ Start as the first DevOps Engineer at GuardRails.
 - Significantly improve the on-premise application packaging with KOTS (including preflight tests, support bundle generation, and the application definition)
 - Load test the on-premise application and create a resource capacity estimation calculator as a reference for customers
 - Control cloud computing cost
+  - Reduced Aurora database costs by 50% through query optimization and performance tuning
+  - Achieved 80% reduction in EC2 costs by implementing autoscaling, right-sizing instances, and leveraging spot instances
 
 ### Timo digital banking (05/2017 - 02/2022)
 
@@ -40,9 +42,14 @@ DevOps Team Leader at Timo.
 I started as a one-man-team DevOps Engineer to help modernizing Timo systems, services, processes; help other teams in IT department work smoothly with each other; and later build up my DevOps/SysOps team.
 
 - Significantly improving Timo's performance, availability, reliability, scalability and security
-	- Building monitoring system using Grafana, ElasticSearch, Logstash, Kibana and InfluxDB
-	- Analyzing application performance with collected metrics data, including data from Nginx, HAProxy, MariaDB, RabbitMQ, Redis and OS
-	- Optimizing application and its infrastructure, works directly or indirectly with development teams
+	- Transformed Timo from running blind to having comprehensive monitoring by implementing:
+		- Full-stack observability with Grafana, ElasticSearch, Logstash, Kibana (ELK) and InfluxDB
+		- Deep database insights including InnoDB buffer pool usage, query performance, replication lag
+		- Infrastructure metrics covering CPU, memory, disk I/O, and network utilization
+		- Application-level monitoring
+	- Optimizing application and infrastructure performance through monitoring insights:
+		- Reduced a critical user-facing API endpoint from 1s to 25ms by identifying and fixing inefficient database queries
+		- Optimized daily reconciliation job from 12 hours to 4 minutes through query optimization and bash scripting
 	- Hammering the application with locust.io and providing deeper visibility for its performance
 	- Making change with confidence by practicing infrastructure as code with Ansible, Terraform
 	- Enhancing security with internal Public Key Infrastructure (PKI)
