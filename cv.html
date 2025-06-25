@@ -67,7 +67,13 @@ policies).</li>
 application definition)</li>
 <li>Load test the on-premise application and create a resource capacity
 estimation calculator as a reference for customers</li>
-<li>Control cloud computing cost</li>
+<li>Control cloud computing cost
+<ul>
+<li>Reduced Aurora database costs by 50% through query optimization and
+performance tuning</li>
+<li>Achieved 80% reduction in EC2 costs by implementing autoscaling,
+right-sizing instances, and leveraging spot instances</li>
+</ul></li>
 </ul>
 <h3 id="timo-digital-banking-052017---022022">Timo digital banking
 (05/2017 - 02/2022)</h3>
@@ -79,12 +85,25 @@ smoothly with each other; and later build up my DevOps/SysOps team.</p>
 <li>Significantly improving Timo’s performance, availability,
 reliability, scalability and security
 <ul>
-<li>Building monitoring system using Grafana, ElasticSearch, Logstash,
-Kibana and InfluxDB</li>
-<li>Analyzing application performance with collected metrics data,
-including data from Nginx, HAProxy, MariaDB, RabbitMQ, Redis and OS</li>
-<li>Optimizing application and its infrastructure, works directly or
-indirectly with development teams</li>
+<li>Transformed Timo from running blind to having comprehensive
+monitoring by implementing:
+<ul>
+<li>Full-stack observability with Grafana, ElasticSearch, Logstash,
+Kibana (ELK) and InfluxDB</li>
+<li>Deep database insights including InnoDB buffer pool usage, query
+performance, replication lag</li>
+<li>Infrastructure metrics covering CPU, memory, disk I/O, and network
+utilization</li>
+<li>Application-level monitoring</li>
+</ul></li>
+<li>Optimizing application and infrastructure performance through
+monitoring insights:
+<ul>
+<li>Reduced a critical user-facing API endpoint from 1s to 25ms by
+identifying and fixing inefficient database queries</li>
+<li>Optimized daily reconciliation job from 12 hours to 4 minutes
+through query optimization and bash scripting</li>
+</ul></li>
 <li>Hammering the application with locust.io and providing deeper
 visibility for its performance</li>
 <li>Making change with confidence by practicing infrastructure as code
