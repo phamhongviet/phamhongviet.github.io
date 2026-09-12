@@ -9,7 +9,10 @@ I am a seasoned DevOps Engineer and Infrastructure Architect based in Ho Chi Min
 
 ## Highlighted Skills
 
-- Leverage agentic AI coding assistants to enhance development productivity (Cursor, VSCodium + RooCode).
+- Leverage agentic AI coding assistants to enhance development productivity—starting in the early days with Cursor and VSCodium + RooCode, then moving to Claude Code and Codex.
+- Build safe, containerized sandboxes that let AI agents work across codebases and perform development and infrastructure tasks in isolated, reproducible environments.
+- Develop allowlist-based command gateways that give AI agents constrained access to infrastructure.
+- Build and refine AI-assisted operational workflows by evaluating context, prompts, model selection, and results to improve correctness and output speed.
 - Analyze system and application performance and behavior to help making decisions.
 - Automate infrastructure tasks at large scale using wide variety of tools and programming languages including Ansible, Terraform, Bash, Python, Jenkins, Kubernetes, etc.
 - Manage Linux servers. Deep understanding of GNU/Linux. Have been using ArchLinux at home and work as my daily driver since 2010.
