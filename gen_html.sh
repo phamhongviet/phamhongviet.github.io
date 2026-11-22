@@ -1,6 +1,8 @@
 #!/bin/bash
 
-find . -name '*.md' | while read md_f; do
+dir=${1:-.}
+
+find "$dir" -name '*.md' | while read md_f; do
 echo "- ${md_f}"
 html_f=${md_f/.md/.html}
 f_name=$(basename "$md_f")
