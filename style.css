@@ -1,25 +1,25 @@
 /* Base styles */
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #34495e;
+  --primary-color: #550000; /* Favicon burgundy */
+  --secondary-color: #703333;
   --text-color: #333;
-  --light-gray: #ecf0f1;
-  --border-color: #bdc3c7;
-  --link-color: #3498db;
+  --page-background: #f7eeee;
+  --border-color: #c7a8a8;
+  --link-color: #8a2020;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #ecf0f1;
-    --secondary-color: #bdc3c7;
-    --text-color: #ecf0f1;
-    --light-gray: #2c3e50;
-    --border-color: #34495e;
-    --link-color: #3498db;
+    --primary-color: #fff5f5;
+    --secondary-color: #e6c5c5;
+    --text-color: #faeeee;
+    --page-background: #550000;
+    --border-color: #704848;
+    --link-color: #f2a9a9;
   }
-  
+
   body {
-    background-color: #1a1a1a;
+    background-color: #211717;
   }
 }
 
@@ -62,7 +62,7 @@ h3 {
 html {
   max-width: 900px;
   margin: 0 auto;
-  background-color: var(--light-gray);
+  background-color: var(--page-background);
 }
 
 /* Links */
