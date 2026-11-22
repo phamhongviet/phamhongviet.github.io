@@ -77,6 +77,8 @@ my @ALLOWED_COMMAND_PREFIXES = (
 );
 ```
 
+Take `terminate-zombie-task.sh`. It uses `kubectl exec` to run Python in every pod of `statefulset/my-app` and passes the Python script over stdin. The Python code checks a condition in the database and terminates only the processes that match. Although the script runs with much higher privileges than I give my agent directly, it's been reviewed and well tested. My agent can run the script on my behalf.
+
 A restricted shell is an old pattern. A remote Git server that accepts SSH connections also uses this pattern to let users run Git commands without giving them shell access.
 
 With this, I sleep better when mistakes don't create incidents.
