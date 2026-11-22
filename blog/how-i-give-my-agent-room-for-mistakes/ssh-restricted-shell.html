@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ssh-restricted-shell</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 id="how-i-give-my-agent-room-for-mistakes">How I give my agent room
+for mistakes</h1>
+<p><em>Because it will make mistakes anyway.</em></p>
+<h2 id="ssh-restricted-shell">SSH Restricted Shell</h2>
+<p>2026-11-21</p>
+<hr />
+<p>I was given access to a customer’s Kubernetes cluster to manage a
+namespace. I have to SSH to a bastion box. On the box, I can use
+<code>kubectl</code> to connect to the cluster. I was given namespace
+admin permission. I asked for an extra user with read-only permissions
+and was denied.</p>
+<p>I use an AI agent to help me with certain tasks, mostly
+troubleshooting when things don’t work. Who wouldn’t these days, right?
+But I don’t want my agent to have a full shell on the bastion box, and
+certainly not namespace admin access through <code>kubectl</code>.</p>
+<p>I can tell my agent in <code>AGENTS.md</code> to change nothing and
+make no mistakes. But sometimes, how I understand my prompt isn’t how my
+agent understands it. I can type “help me fix this issue” when what I
+mean is “write a <code>patch.yaml</code> and let me review it and apply
+it myself.” My agent might instead take that to mean “fix this issue”
+and run <code>kubectl patch</code> without my review.</p>
+<p>My agent will misunderstand me and do something hazardous on prod. It
+has happened before quite a lot of times. And it will happen again.</p>
+<hr />
+<p>So I wrote a restricted shell (well, my agent wrote it), which my
+agent is forced to use when it connects to the box with its own SSH
+key.</p>
+<p>I initially wanted to write the shell in Python. But the bastion box
+is so slim that Python isn’t installed. I’m in luck: the box has Perl.
+So I wrote <code>rok.pl</code> (read-only kubectl). And no, I don’t know
+Perl.</p>
+<p>My <code>~/.ssh/authorized_keys</code> on the bastion looks like this
+(key data shown as placeholders):</p>
+<pre class="text"><code>ssh-ed25519 &lt;my-public-key&gt; me
+restrict,command=&quot;/home/myuser/bin/rok.pl&quot; ssh-ed25519 &lt;agent-public-key&gt; agent</code></pre>
+<p>One line contains my normal SSH public key, which grants full shell
+access. The other contains my agent’s public key. For that key,
+<code>command=</code> forces SSH to run <code>rok.pl</code>. My agent
+doesn’t have access to my private key.</p>
+<hr />
+<p>What <code>rok.pl</code> does is very simple: it checks the requested
+command, which SSH passes in <code>SSH_ORIGINAL_COMMAND</code>, against
+a pattern. If the command matches the pattern, it’s executed. Otherwise,
+an error code is returned, telling the agent what it cannot do. It’s
+basically an allowlist for my agent’s <code>kubectl</code> commands.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode perl"><code class="sourceCode perl"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">my</span> <span class="dt">@ALLOWED_COMMAND_PREFIXES</span> = (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>date<span class="ot">)</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>uptime<span class="ot">)</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl get<span class="ot">)</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl describe<span class="ot">)</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl logs<span class="ot">)</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl explain<span class="ot">)</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>In my <code>AGENTS.md</code>, I tell my agent to run
+<code>ssh bastion kubectl</code> to access the cluster, with a few
+examples.</p>
+<p>There are limitations. For example, <code>rok.pl</code> doesn’t allow
+pipes or multiple commands. But I can live with that. My agent does the
+hard work anyway. Piping can be done locally, usually with
+<code>grep</code>. SSH connections can be reused with
+<code>ControlMaster</code>, so it doesn’t matter much whether I run one
+command or several.</p>
+<hr />
+<p>My agent can still do <code>kubectl get secret</code>. It’s still a
+valid read-only operation. A restricted shell that allows
+<code>kubectl get</code>, <code>describe</code>, and <code>logs</code>
+doesn’t prevent my agent from reading sensitive data. Not perfect, but
+still much better than a full shell. My agent’s reading secrets isn’t
+the end of the world. Most of the time, it’s smart enough to redact the
+secret on its own.</p>
+<p>Over time, I added more and more commands to <code>rok.pl</code>.
+Some of them use <code>kubectl exec</code> to run commands like
+<code>ls</code>, <code>cat</code>, <code>tail</code>, and
+<code>head</code>. Some of them are scripts to fix edge cases while the
+devs find a better solution. I can hardly call it Read-Only-Kubectl
+anymore. But the name stays. I will refuse to answer what
+<code>rok</code> stands for if anyone asks.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode perl"><code class="sourceCode perl"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">my</span> <span class="dt">@ALLOWED_COMMAND_PREFIXES</span> = (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>date<span class="ot">)</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>uptime<span class="ot">)</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl get<span class="ot">)</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl describe<span class="ot">)</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl logs<span class="ot">)</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl explain<span class="ot">)</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- ls<span class="ot">)</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- grep<span class="ot">)</span>],</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- find<span class="ot">)</span>],</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- head<span class="ot">)</span>],</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- tail<span class="ot">)</span>],</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- cat<span class="ot">)</span>],</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- df<span class="ot">)</span>],</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>kubectl exec * -- du<span class="ot">)</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>tmux new -d ./terminate-zombie-task.sh<span class="ot">)</span>],</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>./terminate-zombie-task.sh<span class="ot">)</span>],</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>A restricted shell is an old pattern. A remote Git server that
+accepts SSH connections also uses this pattern to let users run Git
+commands without giving them shell access.</p>
+<p>With this, I sleep better when mistakes don’t create incidents.</p>
+</body>
+</html>
