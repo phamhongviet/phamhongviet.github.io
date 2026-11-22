@@ -48,7 +48,8 @@ restrict,command=&quot;/home/myuser/bin/rok.pl&quot; ssh-ed25519 &lt;agent-publi
 <p>One line contains my normal SSH public key, which grants full shell
 access. The other contains my agent’s public key. For that key,
 <code>command=</code> forces SSH to run <code>rok.pl</code>. My agent
-doesn’t have access to my private key.</p>
+runs in a docker container. It can’t access my private key, my SSH agent
+socket, or my ControlMaster socket. More on that later.</p>
 <hr />
 <p>What <code>rok.pl</code> does is very simple: it checks the requested
 command, which SSH passes in <code>SSH_ORIGINAL_COMMAND</code>, against
@@ -107,6 +108,10 @@ class="sourceCode perl"><code class="sourceCode perl"><span id="cb3-1"><a href="
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>tmux new -d ./terminate-zombie-task.sh<span class="ot">)</span>],</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    [<span class="ot">qw(</span>./terminate-zombie-task.sh<span class="ot">)</span>],</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p><em>Edit: While writing this blog post, I realized that allowing
+<code>find</code> is dangerous. With unchecked arguments, my agent can
+use <code>find</code> to delete files, or execute anything inside the
+pod. Oops.</em></p>
 <p>Take <code>terminate-zombie-task.sh</code>. It uses
 <code>kubectl exec</code> to run Python in every pod of
 <code>statefulset/my-app</code> and passes the Python script over stdin.

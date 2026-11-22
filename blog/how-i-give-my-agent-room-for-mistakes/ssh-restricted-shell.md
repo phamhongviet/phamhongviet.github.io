@@ -29,7 +29,8 @@ ssh-ed25519 <my-public-key> me
 restrict,command="/home/myuser/bin/rok.pl" ssh-ed25519 <agent-public-key> agent
 ```
 
-One line contains my normal SSH public key, which grants full shell access. The other contains my agent's public key. For that key, `command=` forces SSH to run `rok.pl`. My agent doesn't have access to my private key.
+One line contains my normal SSH public key, which grants full shell access. The other contains my agent's public key. For that key, `command=` forces SSH to run `rok.pl`.
+My agent runs in a docker container. It can’t access my private key, my SSH agent socket, or my ControlMaster socket. More on that later.
 
 ---
 
@@ -77,8 +78,11 @@ my @ALLOWED_COMMAND_PREFIXES = (
 );
 ```
 
+*Edit: While writing this blog post, I realized that allowing `find` is dangerous. With unchecked arguments, my agent can use `find` to delete files, or execute anything inside the pod. Oops.*
+
 Take `terminate-zombie-task.sh`. It uses `kubectl exec` to run Python in every pod of `statefulset/my-app` and passes the Python script over stdin. The Python code checks a condition in the database and terminates only the processes that match. Although the script runs with much higher privileges than I give my agent directly, it's been reviewed and well tested. My agent can run the script on my behalf.
 
 A restricted shell is an old pattern. A remote Git server that accepts SSH connections also uses this pattern to let users run Git commands without giving them shell access.
 
 With this, I sleep better when mistakes don't create incidents.
+
