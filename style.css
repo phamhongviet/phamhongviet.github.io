@@ -98,6 +98,70 @@ p:first-of-type {
   margin-bottom: 2rem;
 }
 
+/* Pandoc syntax highlighting (fragment output omits the standalone styles). */
+code.sourceCode {
+  --syntax-keyword: #007020;
+  --syntax-type: #902000;
+  --syntax-number: #336a4b;
+  --syntax-string: #305f93;
+  --syntax-comment: #52646d;
+  --syntax-function: #005e8a;
+  --syntax-variable: #704b87;
+  --syntax-error: #a61c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  code.sourceCode {
+    --syntax-keyword: #8bd49c;
+    --syntax-type: #ffab91;
+    --syntax-number: #a7d6a7;
+    --syntax-string: #9ecbff;
+    --syntax-comment: #a5b5bf;
+    --syntax-function: #79d4e8;
+    --syntax-variable: #d5b4f2;
+    --syntax-error: #ff9b9b;
+  }
+}
+
+pre.sourceCode {
+  overflow-x: auto;
+}
+
+code.sourceCode :is(.kw, .cf, .ot) {
+  color: var(--syntax-keyword);
+  font-weight: bold;
+}
+
+code.sourceCode :is(.dt, .at, .pp) {
+  color: var(--syntax-type);
+}
+
+code.sourceCode :is(.dv, .bn, .fl, .cn) {
+  color: var(--syntax-number);
+}
+
+code.sourceCode :is(.st, .ch, .sc, .ss, .vs, .im) {
+  color: var(--syntax-string);
+}
+
+code.sourceCode :is(.co, .do, .an, .cv, .in) {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+code.sourceCode :is(.fu, .bu, .op) {
+  color: var(--syntax-function);
+}
+
+code.sourceCode :is(.va, .ex) {
+  color: var(--syntax-variable);
+}
+
+code.sourceCode :is(.al, .er, .wa) {
+  color: var(--syntax-error);
+  font-weight: bold;
+}
+
 /* Print styles */
 @media print {
   body {
